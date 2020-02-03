@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+
+  "name": "PSN Wishlist Downloader",
+  "description": "Allows to download PSN Wishlist as a CSV file",
+
+  "version": "0.1",
+  "homepage_url": "https://github.com/mluts/psn-wishlist-downloader",
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+  "browser_action": {
+    "default_title": "PSN Wishlist Downloader",
+    "default_popup": "src/popup.html"
+  }
+}
