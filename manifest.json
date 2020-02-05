@@ -7,12 +7,19 @@
   "version": "0.1",
   "homepage_url": "https://github.com/mluts/psn-wishlist-downloader",
 
-  "background": {
-    "scripts": ["background.js"]
-  },
-
   "browser_action": {
     "default_title": "PSN Wishlist Downloader",
-    "default_popup": "src/popup.html"
-  }
+    "default_popup": "src/menu/menu.html"
+  },
+
+  "permissions": [
+    "activeTab"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["*://store.playstation.com/*"],
+      "js": ["src/menu/content.js"]
+    }
+  ]
 }
