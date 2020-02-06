@@ -1,10 +1,8 @@
-console.log("Loading Content Script")
-
 function wishlistItems() {
   return Array.prototype.map.call(
     document.querySelectorAll('.wishlist-item-cell'),
     parseWishlistItem
-  )
+  );
 }
 
 function parseWishlistItem(el) {

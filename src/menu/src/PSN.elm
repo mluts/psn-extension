@@ -1,5 +1,6 @@
 module PSN exposing (..)
 
+import Csv.Encode as CSV
 import Json.Decode as D
 import Json.Encode as E
 import Parser
@@ -18,9 +19,16 @@ type Price
     | PriceAmount Float
 
 
+trim str =
+    str
+        |> String.replace " " ""
+        |> String.replace "\t" ""
+        |> String.replace "\n" ""
+
+
 parseFloat : String -> Price
 parseFloat str =
-    case Parser.run Parser.float str of
+    case Parser.run Parser.float (trim str) of
         Err err ->
             PriceBadNumber
 
@@ -72,3 +80,32 @@ wishlistItemsWithError =
     D.map2 wishlistHandleErr
         (D.maybe (D.field "ok" wishlistItems))
         (D.maybe (D.field "err" D.string))
+
+
+priceCsv : Price -> String
+priceCsv price =
+    case price of
+        PriceBadNumber ->
+            ""
+
+        PriceMissing ->
+            ""
+
+        PriceAmount num ->
+            String.fromFloat num
+
+
+wishlistCsvRow : WishlistItem -> List String
+wishlistCsvRow { name, prevPrice, currPrice } =
+    [ name
+    , priceCsv prevPrice
+    , priceCsv currPrice
+    ]
+
+
+wishlistCSV : List WishlistItem -> String
+wishlistCSV wlItems =
+    CSV.toString
+        { headers = [ "Name", "Prev Price", "Curr Price" ]
+        , records = List.map wishlistCsvRow wlItems
+        }

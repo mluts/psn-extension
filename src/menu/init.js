@@ -5,10 +5,8 @@ app.ports.activeTabExecuteScript.subscribe(function (data) {
     code: data.code
   }).then(
     res => {
-      r = {ok: res, id: data.id};
-      console.log("result", res);
-      app.ports.activeTabScriptResult.send(r)
+      app.ports.activeTabScriptResult.send({ok: res[0], id: data.id});
     },
-    err => app.ports.activeTabScriptResult.send({error: res.toString(), id: data.id})
+    err => app.ports.activeTabScriptResult.send({error: err.toString(), id: data.id})
   )
 })

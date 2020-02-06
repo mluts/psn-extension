@@ -2,6 +2,7 @@ module Main exposing (..)
 
 import Browser
 import Dict
+import File.Download
 import Json.Decode as D
 import Json.Encode as E
 import Model exposing (..)
@@ -64,10 +65,12 @@ update : Message -> Model -> ( Model, Cmd Message )
 update msg model =
     case msg of
         DownloadCSV ->
-            ( { model | state = "Downloading CSV" }, Cmd.none )
+            ( { model | state = "Downloading CSV" }
+            , File.Download.string "psn-wishlist.csv" "text/csv" (PSN.wishlistCSV model.wishlistItems)
+            )
 
         GotPSNWishlistItems items ->
-            ( { model | state = "Got PSN Wishlist Items", wishlistItems = items |> Debug.log "wishlist Items" }, Cmd.none )
+            ( { model | state = "Got PSN Wishlist Items", wishlistItems = items }, Cmd.none )
 
         PSNWishlistScriptError err ->
             ( { model | error = err }, Cmd.none )
