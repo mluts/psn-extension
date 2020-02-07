@@ -1,10 +1,18 @@
 {
   "manifest_version": 2,
 
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "addon@example.com",
+      "strict_min_version": "42.0"
+    }
+  },
+
   "name": "PSN Wishlist Downloader",
   "description": "Allows to download PSN Wishlist as a CSV file",
 
   "version": "0.1",
+
   "homepage_url": "https://github.com/mluts/psn-wishlist-downloader",
 
   "browser_action": {
@@ -13,7 +21,8 @@
   },
 
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "*://store.playstation.com/*"
   ],
 
   "content_scripts": [
