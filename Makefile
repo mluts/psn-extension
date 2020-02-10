@@ -4,7 +4,7 @@ menu_js_optimized: optimize = true
 
 default: menu_js
 
-release: menu_js_optimized manifest.json
+release: menu_js_optimized manifest.json psn-icon*
 	web-ext build -i package-lock.json Makefile 'src/menu/elm-stuff' 'src/menu/elm.json' 'src/menu/src'
 
 run: menu_js
