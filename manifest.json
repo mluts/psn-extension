@@ -17,7 +17,7 @@
 
   "browser_action": {
     "default_title": "PSN Wishlist Downloader",
-    "default_popup": "src/menu/menu.html",
+    "default_popup": "elm/menu.html",
 
     "browser_style": true,
 
@@ -36,7 +36,7 @@
   "content_scripts": [
     {
       "matches": ["*://store.playstation.com/*"],
-      "js": ["src/menu/content.js"]
+      "js": ["elm/content.js"]
     }
   ]
 }

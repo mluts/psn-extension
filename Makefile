@@ -5,20 +5,20 @@ menu_js_optimized: optimize = true
 default: menu_js
 
 release: menu_js_optimized manifest.json psn-icon*
-	web-ext build -i package-lock.json Makefile 'src/menu/elm-stuff' 'src/menu/elm.json' 'src/menu/src'
+	web-ext build -i package-lock.json Makefile 'elm/elm-stuff' 'elm/elm.json' 'elm/src'
 
 run: menu_js
 	web-ext run
 
-menu_js: src/menu/menu.js
+menu_js: elm/menu.js
 
-menu_js_optimized: src/menu/menu.js
+menu_js_optimized: elm/menu.js
 
-src/menu/menu.js: $(wildcard src/menu/src/**.elm) src/menu/elm.json
-	cd src/menu && $(ELM_MAKE) src/Main.elm --output=menu.js
+elm/menu.js: $(wildcard elm/src/**.elm) elm/elm.json
+	cd elm && $(ELM_MAKE) src/Main.elm --output=menu.js
 
 clean:
-	rm src/menu/menu.js
-	rm web-ext-artifacts/*.zip
+	rm -f elm/menu.js
+	rm -f web-ext-artifacts/*.zip
 
 .PHONY: clean
