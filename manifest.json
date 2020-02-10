@@ -17,7 +17,15 @@
 
   "browser_action": {
     "default_title": "PSN Wishlist Downloader",
-    "default_popup": "src/menu/menu.html"
+    "default_popup": "src/menu/menu.html",
+
+    "browser_style": true,
+
+    "default_icon": {
+      "16": "psn-icon-16.png",
+      "32": "psn-icon-32.png",
+      "64": "psn-icon-64.png"
+    }
   },
 
   "permissions": [
